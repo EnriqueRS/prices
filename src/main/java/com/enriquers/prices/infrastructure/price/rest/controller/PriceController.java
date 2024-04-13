@@ -11,32 +11,21 @@ import java.time.ZoneId;
 import java.util.Date;
 import java.util.List;
 import lombok.RequiredArgsConstructor;
-import org.springframework.format.annotation.DateTimeFormat;
-import org.springframework.http.HttpStatus;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.bind.annotation.ResponseStatus;
 import org.springframework.web.bind.annotation.RestController;
 
 @RestController
 @RequiredArgsConstructor
-@RequestMapping("/api/v1/prices")
-public class PriceController {
+public class PriceController implements PriceControllerAPI {
   private final PriceInPort pricePort;
 
-  @GetMapping
-  @ResponseStatus(HttpStatus.OK)
+  @Override
   public List<PriceResponseDTO> findAll() {
     return PriceDTOMapper.toPriceResponseDTO(pricePort.findAll());
   }
 
-  @GetMapping("/pvp")
-  @ResponseStatus(HttpStatus.OK)
-  public PriceResponseDTO findPVP(
-      @RequestParam @DateTimeFormat(pattern = "dd.MM.yyyy hh:mm:ss") Date requestTime,
-      @RequestParam  Integer productId,
-      @RequestParam Integer brandId) {
+  @Override
+  public PriceResponseDTO findPVP(Date requestTime, Integer productId, Integer brandId)
+      throws PriceException {
     PriceQuery request = new PriceQuery(
         LocalDateTime.ofInstant(requestTime.toInstant(), ZoneId.systemDefault()), productId, brandId);
     Price pvpPrice = pricePort.findPVP(request);
