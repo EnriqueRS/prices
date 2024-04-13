@@ -48,7 +48,7 @@ public interface PriceControllerAPI {
       @Parameter(description = "Request time in format dd.MM.yyyy hh:mm:ss",
       example = "14.06.2020 10:00:00",
       required = true)
-      @RequestParam @DateTimeFormat(pattern = "dd.MM.yyyy hh:mm:ss") Date requestTime,
+      @RequestParam @DateTimeFormat(pattern = "dd.MM.yyyy HH:mm:ss") Date requestTime,
       @Parameter(description = "Product identifier", example = "35455", required = true)
       @RequestParam Integer productId,
       @Parameter(description = "Brand identifier", example = "1", required = true)
