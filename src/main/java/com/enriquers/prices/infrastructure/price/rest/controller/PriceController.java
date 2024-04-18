@@ -6,9 +6,7 @@ import com.enriquers.prices.domain.price.model.PriceQuery;
 import com.enriquers.prices.infrastructure.price.exceptions.PriceException;
 import com.enriquers.prices.infrastructure.price.rest.dto.PriceResponseDTO;
 import com.enriquers.prices.infrastructure.price.rest.dto.mapper.PriceDTOMapper;
-import java.time.LocalDateTime;
-import java.time.ZoneId;
-import java.util.Date;
+import java.time.OffsetDateTime;
 import java.util.List;
 import lombok.RequiredArgsConstructor;
 import org.springframework.web.bind.annotation.RestController;
@@ -24,10 +22,9 @@ public class PriceController implements PriceControllerAPI {
   }
 
   @Override
-  public PriceResponseDTO findPVP(Date requestTime, Integer productId, Integer brandId)
+  public PriceResponseDTO findPVP(OffsetDateTime requestTime, Integer productId, Integer brandId)
       throws PriceException {
-    PriceQuery request = new PriceQuery(
-        LocalDateTime.ofInstant(requestTime.toInstant(), ZoneId.systemDefault()), productId, brandId);
+    PriceQuery request = new PriceQuery(requestTime.toLocalDateTime(), productId, brandId);
     Price pvpPrice = pricePort.findPVP(request);
     if (pvpPrice == null) {
       throw new PriceException("PVP price not found for product " + productId + " and brand " + brandId + " at " + requestTime + ".");
