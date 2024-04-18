@@ -59,8 +59,8 @@ public class PriceTestsHelper {
   static final String BASE_ENDPOINT = "/api/v1/prices";
   static final String PVP_ENDPOINT =
       BASE_ENDPOINT + "/pvp?brandId={brandId}&productId={productId}&requestTime={requestTime}";
-  static final String INTEGRATION_REQUEST_TIME = "14.06.2020 10:00:00";
-  static final String INTEGRATION_REQUEST_TIME_INVALID = "14.06.2021 10:00:00";
+  static final String INTEGRATION_REQUEST_TIME = "2020-06-14T10:00:00Z";
+  static final String INTEGRATION_REQUEST_TIME_INVALID = "2021-06-14T10:00:00Z";
   static final Integer INTEGRATION_BRAND_ID = 1;
   static final Integer INTEGRATION_PRODUCT_ID = 35455;
   static final Integer INTEGRATION_PRICE_LIST = 1;
