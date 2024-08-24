@@ -43,6 +43,41 @@ Principio de segregación de interfaces las interfaces deben ser específicas pa
 
 Principio de inversión de dependencias las capas internas no dependen de las capas externas.
 
+## Patrones de diseño usados
+
+### - Inyección de Dependencias:
+
+**Descripción**: Este patrón permite la inyección de dependencias en lugar de crearlas directamente
+dentro de las clases, facilitando la prueba y el mantenimiento del código.
+
+**Ubicación en el proyecto**: Uso de @Autowired en Spring Boot para inyectar dependencias.
+
+---
+
+### - Builder:
+
+**Descripción**: Este patrón se utiliza para construir objetos complejos paso a paso.
+
+**Ubicación en el proyecto**: Uso de Lombok con la anotación @Builder para construir objetos.
+
+---
+
+### - Repositorio:
+
+**Descripción**: Este patrón se utiliza para encapsular el acceso a la fuente de datos y
+proporcionar una interfaz para realizar operaciones CRUD.
+
+**Ubicación en el proyecto**: Interfaces de repositorio de Spring Data JPA (PriceRepository).
+
+---
+
+### - Singleton:
+
+**Descripción**: Este patrón asegura que una clase tenga solo una instancia y proporciona un punto
+de acceso global a ella.
+
+**Ubicación en el proyecto**: Beans de Spring Boot que son singleton por defecto.
+
 ## Descarga y ejecución
 
 Para descargar el proyecto, se debe ejecutar el siguiente comando:
