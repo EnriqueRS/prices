@@ -1,0 +1,4 @@
+- quitar Spring de la capa de application?
+- revisar todos los imports
+- crear interface para los controladores
+- controlar cuando no devuelva nada
