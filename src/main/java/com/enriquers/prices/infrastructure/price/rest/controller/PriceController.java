@@ -4,6 +4,7 @@ import com.enriquers.prices.application.price.port.PriceInPort;
 import com.enriquers.prices.domain.price.model.Price;
 import com.enriquers.prices.domain.price.model.PriceQuery;
 import com.enriquers.prices.infrastructure.price.exceptions.PriceException;
+import com.enriquers.prices.infrastructure.price.exceptions.PriceNotFoundException;
 import com.enriquers.prices.infrastructure.price.rest.dto.PriceResponseDTO;
 import com.enriquers.prices.infrastructure.price.rest.dto.mapper.PriceDTOMapper;
 import java.time.OffsetDateTime;
@@ -27,7 +28,7 @@ public class PriceController implements PriceControllerAPI {
     PriceQuery request = new PriceQuery(requestTime.toLocalDateTime(), productId, brandId);
     Price pvpPrice = pricePort.findPVP(request);
     if (pvpPrice == null) {
-      throw new PriceException("PVP price not found for product " + productId + " and brand " + brandId + " at " + requestTime + ".");
+      throw new PriceNotFoundException(productId, brandId, requestTime);
     }
     return PriceDTOMapper.toPriceResponseDTO(pvpPrice);
   }

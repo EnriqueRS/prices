@@ -17,6 +17,13 @@ public class PriceExceptionHandler {
     return new ResponseEntity<>(error, HttpStatus.BAD_REQUEST);
   }
 
+  @ExceptionHandler(PriceNotFoundException.class)
+  public ResponseEntity<PriceError> handlePriceNotFoundException(PriceNotFoundException e) {
+    log.error("Price not found exception", e);
+    PriceError error = new PriceError(e.getMessage());
+    return new ResponseEntity<>(error, HttpStatus.NOT_FOUND);
+  }
+
   @ExceptionHandler(Exception.class)
   public ResponseEntity<PriceError> handleException(Exception e) {
     log.error("Internal server error", e);
