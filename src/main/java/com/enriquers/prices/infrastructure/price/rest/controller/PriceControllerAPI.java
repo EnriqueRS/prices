@@ -8,9 +8,10 @@ import io.swagger.v3.oas.annotations.media.Schema;
 import io.swagger.v3.oas.annotations.responses.ApiResponse;
 import io.swagger.v3.oas.annotations.responses.ApiResponses;
 import io.swagger.v3.oas.annotations.tags.Tag;
-import java.util.Date;
+import java.time.OffsetDateTime;
 import java.util.List;
 import org.springframework.format.annotation.DateTimeFormat;
+import org.springframework.format.annotation.DateTimeFormat.ISO;
 import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -45,10 +46,10 @@ public interface PriceControllerAPI {
       @ApiResponse(responseCode = "500", description = "Parse error in request time")
   })
   PriceResponseDTO findPVP(
-      @Parameter(description = "Request time in format dd.MM.yyyy hh:mm:ss",
-      example = "14.06.2020 10:00:00",
+      @Parameter(description = "Request time in format yyyy-MM-dd'T'HH:mm:ssZ",
+          example = "2020-06-14T10:00:00Z",
       required = true)
-      @RequestParam @DateTimeFormat(pattern = "dd.MM.yyyy hh:mm:ss") Date requestTime,
+      @RequestParam @DateTimeFormat(pattern = "yyyy-MM-dd'T'HH:mm:ssZ", iso = ISO.DATE_TIME) OffsetDateTime requestTime,
       @Parameter(description = "Product identifier", example = "35455", required = true)
       @RequestParam Integer productId,
       @Parameter(description = "Brand identifier", example = "1", required = true)
